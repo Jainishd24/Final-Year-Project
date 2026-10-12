@@ -1,0 +1,65 @@
+{
+  "doc_id": "1308768",
+  "title": "Gurbaksh Singh Sibbia Etc vs State Of Punjab on 9 April, 1980",
+  "date_iso": "1980-04-09",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Author: Y.V. Chandrachud",
+    "Bench: Y.V. Chandrachud, P.N. Bhagwati, N.L. Untwalia, R.S. Pathak, O. Chinnappa Reddy"
+  ],
+  "acts_list": [
+    "Section 437 of the Code",
+    "Section 439 of the Code",
+    "Section 46 of the Code of Criminal Procedure does not contemplate any formality before a person can be said to be taken in custody",
+    "Section 27 of the Evidence Act.",
+    "Section 438 of the Code"
+  ],
+  "sections_structured": [
+    {
+      "act": "CrPC",
+      "section": "438"
+    },
+    {
+      "act": "the Code",
+      "section": "437"
+    },
+    {
+      "act": "the Code",
+      "section": "439"
+    },
+    {
+      "act": "CrPC",
+      "section": "46"
+    },
+    {
+      "act": "the Evidence Act.",
+      "section": "27"
+    },
+    {
+      "act": "the Evidence Act in regard to a discovery of facts made in pursuance of information supplied by a person released on bail by invoking the principle stated by this Court in State of U.P. v. Deoman Upadhyaya to the effect that when a person not in custody approaches a police officer investigating an offence and offers to give information leading to the discovery of a fact"
+    },
+    {
+      "act": "the Evidence Act can be made out",
+      "section": "27"
+    },
+    {
+      "act": "the Code.",
+      "section": "439"
+    }
+  ],
+  "decision_label_std": "GRANTED",
+  "outcome_summary": "The court holds that granting blanket anticipatory bail is not appropriate and orders should specify the offence or offences for which the bail applies.",
+  "conclusion_clean": "bail\" to an accused who is under arrest involves a contradiction in terms, in so far as the offence or offences for which he is arrested, are concerned.",
+  "citations": [],
+  "plain_summary": "The court holds that granting blanket anticipatory bail is not appropriate and orders should specify the offence or offences for which the bail applies. The court also emphasizes the importance of specifying conditions in anticipatory bail orders.",
+  "key_reasons": [
+    "Reason to believe must be founded on reasonable grounds",
+    "Specific events and facts must be disclosed by the applicant",
+    "Order should specify the offence or offences"
+  ],
+  "conditions": [
+    "Condition that the person shall make himself available for interrogation by a police officer as and when required",
+    "Condition that the person shall not, directly or indirectly, make any inducement, threat or promise to any person acquainted with the facts of the case",
+    "Condition that the person shall not leave India without the previous permission of the Court"
+  ]
+}

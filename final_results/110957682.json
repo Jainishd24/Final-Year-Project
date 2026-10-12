@@ -1,0 +1,54 @@
+{
+  "doc_id": 110957682,
+  "title": "People'S Union For Civil Liberties & Anr vs Union Of India",
+  "date_iso": "2003-12-16",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Bench: S. Rajendra Babu, G.P. Mathur"
+  ],
+  "acts_list": [
+    "Jammu Kashmir Constitution Act",
+    "TADA by majority in Kartar Singh is contained in paras",
+    "Code of Criminal Procedure",
+    "POTA",
+    "NDPS Act"
+  ],
+  "decision_label_std": "GRANTED",
+  "conclusion_clean": "order of the Judicial Magistrate, Madurai.",
+  "sections_structured": [
+    {
+      "act": "Jammu Kashmir Constitution Act",
+      "section": "5"
+    },
+    {
+      "act": "TADA by majority in Kartar Singh is contained in paras",
+      "section": "8"
+    },
+    {
+      "act": "Code of Criminal Procedure",
+      "section": "39"
+    },
+    {
+      "act": "POTA",
+      "section": "14"
+    },
+    {
+      "act": "POTA",
+      "section": "18"
+    },
+    {
+      "act": "POTA",
+      "section": "19"
+    },
+    {
+      "act": "NDPS Act",
+      "section": "37"
+    }
+  ],
+  "citations": [
+    "Citation1"
+  ],
+  "plain_summary": "",
+  "key_reasons": [],
+  "conditions": []
+}

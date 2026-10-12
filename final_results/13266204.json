@@ -1,0 +1,39 @@
+{
+  "doc_id": 13266204,
+  "title": "Mahipal vs Rajesh Kumar @ Polia on 5 December, 2019",
+  "date_iso": "2019-12-05",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Bench: Hrishikesh Roy, Dhananjaya Y Chandrachud",
+    "Author: D.Y. Chandrachud"
+  ],
+  "acts_list": [
+    "Section 302 of the Penal Code. Several bail applications filed by the accused were dismissed by the Additional",
+    "Section 161 of the CrPC of the appellant and Aashish were recorded. A charge-sheet was filed against the five accused on",
+    "Section 439 of the CrPC to grant bail. The power to grant bail under Section",
+    "Section 439 of the Code of Criminal Procedure"
+  ],
+  "decision_label_std": "GRANTED",
+  "conclusion_clean": "bail does not furnish the reasons that inform the decision, there is a presumption of the non-application of mind which may require the intervention of this Court. Where an earlier application for bail has been rejected, there is a higher burden on the appellate court to furnish specific reasons as to why bail should be granted",
+  "sections_structured": [
+    {
+      "section": "302",
+      "act": "the Penal Code. Several bail applications filed by the accused were dismissed by the Additional"
+    },
+    {
+      "section": "161",
+      "act": "CrPC"
+    },
+    {
+      "section": "439",
+      "act": "CrPC"
+    }
+  ],
+  "citations": [],
+  "plain_summary": "The High Court's order enlarging the accused on bail is set aside due to failure to consider material facts and lack of recorded reasons for granting bail.",
+  "key_reasons": [
+    "The court failed to consider material facts",
+    "Order did not record reasons for granting bail"
+  ],
+  "conditions": []
+}

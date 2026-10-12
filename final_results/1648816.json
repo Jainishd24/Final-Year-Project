@@ -1,0 +1,31 @@
+{
+  "doc_id": "1648816",
+  "title": "Union Of India vs Shri Shiv Shanker Kesari on 14 September, 2007",
+  "date_iso": "2007-09-14",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Arijit Pasayat",
+    "D.K. Jain"
+  ],
+  "acts_list": [
+    "Narcotic Drugs and Psychotropic Substances Act, 1985"
+  ],
+  "decision_label_std": "GRANTED",
+  "conclusion_clean": "Bail granted.",
+  "sections_structured": [
+    {
+      "act": "the Narcotic Drugs and Psychotropic Substances Act, 1985",
+      "section": "37"
+    },
+    {
+      "act": "the Narcotic Drugs and Psychotropic Substances Act, 1985",
+      "section": "67"
+    }
+  ],
+  "citations": [
+    "Citation1"
+  ],
+  "plain_summary": "",
+  "key_reasons": [],
+  "conditions": []
+}

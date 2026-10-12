@@ -1,0 +1,32 @@
+{
+  "doc_id": "12231349",
+  "title": "Manish Kumar @ Lokesh Kumar vs The State Of Bihar on 10 August, 2017",
+  "date_iso": "2017-08-10",
+  "court_std": "Patna High Court - Orders",
+  "judges_list": [
+    "Rakesh Kumar"
+  ],
+  "acts_list": [
+    "Cr.P.C",
+    "Bihar Prohibition and Excise Act"
+  ],
+  "decision_label_std": "GRANTED",
+  "conclusion_clean": "Bail granted.",
+  "sections_structured": [
+    {
+      "act": "the Cr.P.C.",
+      "section": "438"
+    },
+    {
+      "act": "the Cr.P.C.",
+      "section": "438"
+    }
+  ],
+  "citations": [],
+  "plain_summary": "The Patna High Court granted bail to Manish Kumar @ Lokesh Kumar under Section 438 of the Cr.P.C. for grant of anticipatory bail in an event of arrest or surrender.",
+  "key_reasons": [
+    "Recent order dated 07.07.2017",
+    "Legislative competence not raised as point"
+  ],
+  "conditions": []
+}

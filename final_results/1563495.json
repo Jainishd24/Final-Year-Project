@@ -1,0 +1,31 @@
+{
+  "doc_id": 1563495,
+  "title": "Sanjay Chandra vs Cbi",
+  "date_iso": "2011-11-23",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Author: H.L. Dattu",
+    "Bench: H. L. Dattu, G. S. Singhvi"
+  ],
+  "acts_list": [
+    "Section 437 of the Cr.P.C. uses the word",
+    "Section 439 of the Code of Criminal Procedure (in short]"
+  ],
+  "decision_label_std": "GRANTED",
+  "conclusion_clean": "Bail granted.",
+  "sections_structured": [
+    {
+      "act": "IPC",
+      "section": "302"
+    }
+  ],
+  "citations": [
+    "Citation1"
+  ],
+  "plain_summary": "Bail granted for economic offenses. Detention in custody cannot be questioned as violative of Article 21 since authorized by law. Court must balance personal liberty and societal interest while considering bail applications.",
+  "key_reasons": [
+    "Authorized by law",
+    "Balancing personal liberty and societal interest"
+  ],
+  "conditions": []
+}

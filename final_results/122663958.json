@@ -1,0 +1,33 @@
+{
+  "doc_id": 122663958,
+  "title": "Dataram Singh vs The State Of Uttar Pradesh on 6 February, 2018",
+  "date_iso": "2018-02-06",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Bench: Deepak Gupta, Madan B. Lokur",
+    "Author: Madan B. Lokur"
+  ],
+  "acts_list": [
+    "Section 436 of the Code of Criminal Procedure",
+    "Section 138 of the Negotiable Instruments Act"
+  ],
+  "decision_label_std": "GRANTED",
+  "conclusion_clean": "bail to the appellant. It is nobody’s case that the appellant is a shady character and there is nothing on record to indicate that the appellant had earlier been involved in any unacceptable activity, let alone any alleged illegal activity. 18. In our view, taking all these and other factors into consideration, it would be appropriate if the appellant is granted",
+  "sections_structured": [
+    {
+      "section": "436",
+      "act": "CrPC"
+    },
+    {
+      "section": "138",
+      "act": "the Negotiable Instruments Act"
+    }
+  ],
+  "citations": [],
+  "plain_summary": "Bail was granted to the appellant. The court considered various factors before granting bail, including the fact that there was no evidence of unacceptable or illegal activity by the appellant.",
+  "key_reasons": [
+    "No evidence of unacceptable or illegal activity",
+    "Various other factors were taken into consideration"
+  ],
+  "conditions": []
+}

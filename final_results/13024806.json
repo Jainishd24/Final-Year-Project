@@ -1,0 +1,39 @@
+{
+  "doc_id": "13024806",
+  "title": "Aparna Bhat vs The State Of Madhya Pradesh on 18 March, 2021",
+  "date_iso": "2021-03-18",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "S. Ravindra Bhat",
+    "A. M. Khanwilkar"
+  ],
+  "acts_list": [
+    "IPC",
+    "the Code",
+    "IT Act"
+  ],
+  "decision_label_std": "GRANTED",
+  "conclusion_clean": "order or utterance in court, reflects adversely on the entire judicial system of the country, undermining the guarantee to fair justice to all, and especially to victims of sexual violence (of any kind from the most aggravated to the so-called minor offences).",
+  "sections_structured": [
+    {
+      "act": "CrPC",
+      "section": "438"
+    },
+    {
+      "act": "the Code",
+      "section": "438"
+    },
+    {
+      "act": "the IT Act",
+      "section": "67"
+    }
+  ],
+  "citations": [
+    "Citation1"
+  ],
+  "plain_summary": "The document discusses the importance of judicial stereotyping awareness in legal cases, particularly those involving gender-based violence.",
+  "key_reasons": [
+    "Judges must be aware of their own biases and avoid perpetuating harmful stereotypes"
+  ],
+  "conditions": []
+}

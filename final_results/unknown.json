@@ -1,0 +1,29 @@
+{
+  "System": {
+    "Name": "Regex Normalizer",
+    "Type": "Data Engineer",
+    "Description": "Deterministic rules with LLM (Large Language Model)"
+  },
+  "Content": {
+    "Section": [
+      {
+        "Title": "Introduction",
+        "Text": "..."
+      },
+      {
+        "Title": "Powers of the Magistrate",
+        "Text": "..."
+      },
+      {
+        "Title": "Consequences",
+        "Text": "..."
+      }
+    ]
+  },
+  "plain_summary": "Prahlad Singh Bhati vs N.C.T., Delhi & Anr.: The respondent-accused was released on bail despite being charged with murder. The court held that the Magistrate ignored basic principles governing grant of bail.",
+  "key_reasons": [
+    "The Magistrate ignored reasonable grounds for believing the accused guilty of an offence punishable with death or imprisonment for life",
+    "The initial grant of anticipatory bail did not entitle the respondent to insist on regular bail even if he was subsequently found involved in a case of murder"
+  ],
+  "conditions": []
+}

@@ -1,0 +1,47 @@
+{
+  "doc_id": 114457030,
+  "title": "Ash Mohammad vs Shiv Raj Singh @ Lalla Babu & Anr on 20 September, 2012",
+  "date_iso": "2012-09-20",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Bench: Dipak Misra, K. S. Radhakrishnan",
+    "Author: Dipak Misra"
+  ],
+  "acts_list": [
+    "Section 439 of the Code.",
+    "Section 164 of the CrPC",
+    "Section 439 of the CrPC in respect of serious offences",
+    "Section 439 of the Code."
+  ],
+  "sections_structured": [
+    {
+      "act": "the Code.",
+      "section": "439"
+    },
+    {
+      "act": "CrPC",
+      "section": "164"
+    },
+    {
+      "act": "CrPC",
+      "section": "439"
+    },
+    {
+      "act": "the Code.",
+      "section": "439"
+    }
+  ],
+  "decision_label_std": "GRANTED",
+  "outcome_summary": "The Supreme Court sets aside the High Court's order granting bail to a history-sheeter accused of kidnapping, citing the need to consider criminal antecedents and broader concerns when deciding bail applications.",
+  "conclusion_clean": "",
+  "citations": [],
+  "plain_summary": "A short summary here.",
+  "key_reasons": [
+    "nature of the crime",
+    "victim's suffering",
+    "accused's criminal record"
+  ],
+  "conditions": [
+    "accused to surrender forthwith or face custody immediately"
+  ]
+}

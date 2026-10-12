@@ -1,0 +1,35 @@
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+# Secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+# IDE and operating system files
+.vscode/
+.DS_Store
+Thumbs.db
+# Local evaluation and audit outputs
+label_review.csv
+automated_label_audit.csv
+# Intermediate datasets and generated files
+processed_cases/
+processed_cases_with_fields/
+test_cases/
+test_final_results/
+# Generated reports
+output.xlsx
+output1.xlsx
+test_output.xlsx
+# Temporary diagnostic scripts
+check_model.py
+inspect_training.py
+inspect_conclusions.py
+audit_labels.py
+auto_audit_labels.py
+summarize_audit.py
+evaluate_model.py
+test_data_leakage.py

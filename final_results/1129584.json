@@ -1,0 +1,40 @@
+{
+  "doc_id": 1129584,
+  "title": "Prasanta Kumar Sarkar vs Ashis Chatterjee & Anr on 29 October, 2010",
+  "date_iso": "2010-10-29",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Author: D.K. Jain",
+    "Bench: D.K. Jain, H.L. Dattu"
+  ],
+  "acts_list": [
+    "Section 302 of the Indian Penal Code",
+    "Section 439 of the Code. As stated above",
+    "Section 439 of the Code should have been granted to the accused",
+    "Section 439 of the Code of Criminal Procedure"
+  ],
+  "decision_label_std": "GRANTED",
+  "conclusion_clean": "bail should be granted",
+  "sections_structured": [
+    {
+      "section": "302",
+      "act": "IPC"
+    },
+    {
+      "section": "439",
+      "act": "the Code. As stated above"
+    },
+    {
+      "section": "439",
+      "act": "the Code should have been granted to the accused"
+    },
+    {
+      "section": "439",
+      "act": "CrPC"
+    }
+  ],
+  "citations": [],
+  "plain_summary": "",
+  "key_reasons": [],
+  "conditions": []
+}

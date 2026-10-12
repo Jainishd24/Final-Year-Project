@@ -1,0 +1,48 @@
+{
+  "doc_id": 136788839,
+  "title": "Supreme Court Legal Aid Committee ... vs Union Of India (Uoi) And Ors. on 7 October, 1994",
+  "date_iso": "1994-10-07",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Bench: A.M. Ahmadi, B.L. Hansaria",
+    "Author: A.M. Ahmadi"
+  ],
+  "acts_list": [
+    "Section 37 of the Act",
+    "Section 36 of the Act",
+    "Section 309 of the Code and Articles",
+    "Section 36D of the Narcotic Drugs",
+    "Section 190 of the Code"
+  ],
+  "sections_structured": [
+    {
+      "act": "the Act",
+      "section": "37"
+    },
+    {
+      "act": "the Act",
+      "section": "36"
+    },
+    {
+      "act": "the Code and Articles",
+      "section": "309"
+    },
+    {
+      "act": "the Narcotic Drugs",
+      "section": "36D"
+    },
+    {
+      "act": "the Code",
+      "section": "190"
+    }
+  ],
+  "decision_label_std": "GRANTED",
+  "outcome_summary": "The court held that detention of foreign nationals without a speedy trial was illegal and void.",
+  "conclusion_clean": "",
+  "citations": [],
+  "plain_summary": "A short summary here.",
+  "key_reasons": [
+    "Delay in trials can lead to violation of fundamental rights under Articles 14, 19, and 21 of the Constitution"
+  ],
+  "conditions": []
+}

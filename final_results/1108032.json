@@ -1,0 +1,27 @@
+{
+  "doc_id": "1108032",
+  "title": "Siddharam Satlingappa Mhetre vs State Of Maharashtra And Ors on 2 December, 2010",
+  "date_iso": "2010-12-02",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Author: Dalveer Bhandari",
+    "Bench: Dalveer Bhandari, K.S. Panicker Radhakrishnan"
+  ],
+  "acts_list": [
+    "Section 438 of the Code of Criminal Procedure"
+  ],
+  "sections_structured": [
+    {
+      "act": "CrPC",
+      "section": "438"
+    }
+  ],
+  "decision_label_std": "GRANTED",
+  "outcome_summary": "Bail granted.",
+  "conclusion_clean": "orders passed by the courts in anticipatory bail applications. 131. It is imperative for the High Courts through its judicial academies to periodically organize workshops, seminars and training programs for judges, magistrates and lawyers on the importance of following the judgments delivered by this Court.",
+  "citations": [],
+  "conditions": {
+    "personal bond": 50000,
+    "sureties": 2
+  }
+}

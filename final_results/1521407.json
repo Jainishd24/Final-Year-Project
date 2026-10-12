@@ -1,0 +1,34 @@
+{
+  "doc_id": 1521407,
+  "title": "Kalyan Chandra Sarkar vs Rajesh Ranjan @ Pappu Yadav & Anr on 18 January, 2005",
+  "date_iso": "2005-01-18",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Bench: N.Santosh Hegde, S.B.Sinha, P.K.Balasubramanyan"
+  ],
+  "acts_list": [
+    "Section 27 of the Arms Act. This application before the High Court for grant of bail was the",
+    "Section 164 of the Criminal Procedure Code. It was also argued that the maker of the confession Rajan Tiwari was brought from custody",
+    "Section 27 of the Arms Act which is not challenged. After rejection of four bail applications earlier"
+  ],
+  "decision_label_std": "GRANTED",
+  "conclusion_clean": "bail before the High Court, all of which were rejected except the 5th one which order was also set aside in appeal before this Court. The 8th bail application of the accused was granted",
+  "sections_structured": [
+    {
+      "section": "27",
+      "act": "the Arms Act. This application before the High Court for grant of bail was the"
+    },
+    {
+      "section": "164",
+      "act": "the Criminal Procedure Code. It was also argued that the maker of the confession Rajan Tiwari was brought from custody"
+    },
+    {
+      "section": "27",
+      "act": "the Arms Act which is not challenged. After rejection of four bail applications earlier"
+    }
+  ],
+  "citations": [],
+  "plain_summary": "",
+  "key_reasons": [],
+  "conditions": []
+}

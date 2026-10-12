@@ -1,0 +1,36 @@
+{
+  "doc_id": 176600070,
+  "title": "State Of M.P vs Pradeep Sharma",
+  "date_iso": "2013-12-06",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "P Sathasivam",
+    "Ranjan Gogoi"
+  ],
+  "acts_list": [
+    "IPC"
+  ],
+  "sections_structured": [
+    {
+      "act": "IPC",
+      "section": "34"
+    },
+    {
+      "act": "the Code",
+      "section": "82"
+    },
+    {
+      "act": "the Code",
+      "section": "438"
+    }
+  ],
+  "decision_label_std": "GRANTED",
+  "outcome_summary": "bail to both the accused.",
+  "conclusion_clean": "bail to both the accused.",
+  "citations": [
+    "Citation1"
+  ],
+  "plain_summary": "",
+  "key_reasons": [],
+  "conditions": []
+}

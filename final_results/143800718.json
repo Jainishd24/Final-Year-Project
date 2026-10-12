@@ -1,0 +1,46 @@
+{
+  "doc_id": 143800718,
+  "title": "The State Of Telangana vs Habib Abdullah Jeelani & Ors on 6 January, 2017",
+  "date_iso": "2017-01-06",
+  "court_std": "Supreme Court of India",
+  "judges_list": [
+    "Author: Dipak Misra",
+    "Bench: Dipak Misra, Amitava Roy"
+  ],
+  "acts_list": [
+    "Section 482 of the Code of Criminal Procedure ( CrPC ) to interfere in an application for quashment of the investigation",
+    "Section 154 of the Code discloses the commission of a cognizable offence.",
+    "Section 491 of the Criminal Procedure Code to give directions in the nature of habeas corpus. In such a case as the present",
+    "Section 154 of the Code will not be in contravention of Article",
+    "Section 438 of the Code",
+    "Section 482 of the Code of Criminal Procedure"
+  ],
+  "decision_label_std": "GRANTED",
+  "conclusion_clean": "",
+  "sections_structured": [
+    {
+      "section": "482",
+      "act": "CrPC"
+    },
+    {
+      "section": "154",
+      "act": "the Code discloses the commission of a cognizable offence."
+    },
+    {
+      "section": "491",
+      "act": "the Criminal Procedure Code to give directions in the nature of habeas corpus. In such a case as the present"
+    },
+    {
+      "section": "154",
+      "act": "the Code will not be in contravention of Article"
+    },
+    {
+      "section": "438",
+      "act": "the Code"
+    }
+  ],
+  "citations": [],
+  "plain_summary": "",
+  "key_reasons": [],
+  "conditions": []
+}
