@@ -63,6 +63,12 @@ st.markdown(
     color: #172033 !important;
 }
 
+@media (prefers-color-scheme: dark) {
+    [data-testid="stAppViewContainer"] .metadata-value {
+        color: #F1F5F9 !important;
+    }
+}
+
 
 
     .block-container {
