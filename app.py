@@ -55,19 +55,21 @@ st.markdown(
     color: #172033 !important;
 }
 
-[data-testid="stAppViewContainer"] .metadata-label {
-    color: #64748b !important;
-}
 
+
+
+/* Case information: default/light theme */
+/* Case information: adapt automatically to Streamlit theme */
 [data-testid="stAppViewContainer"] .metadata-value {
-    color: #172033 !important;
+    color: var(--text-color) !important;
+    -webkit-text-fill-color: var(--text-color) !important;
 }
 
-@media (prefers-color-scheme: dark) {
-    [data-testid="stAppViewContainer"] .metadata-value {
-        color: #F1F5F9 !important;
-    }
+[data-testid="stAppViewContainer"] .metadata-label {
+    color: var(--text-color) !important;
 }
+
+
 
 
 
