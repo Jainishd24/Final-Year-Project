@@ -1,7 +1,7 @@
 
-import json
 from pathlib import Path
-
+import json
+import requests
 import joblib
 import pandas as pd
 import streamlit as st
@@ -288,6 +288,124 @@ def load_model():
     return joblib.load(MODEL_PATH)
 
 
+def predict_bail_with_llama(
+    facts,
+    sections,
+    additional_details,
+    court,
+    gender,
+    history,
+):
+    
+    prompt = f"""
+Analyse this new bail application in India as an experimental AI tool.
+Do not search for or copy an existing judgment. Do not invent facts.
+
+Consider the alleged offence, seriousness, evidence, investigation
+status, risk of absconding, witness interference, prior criminal
+history, and missing information. Explain uncertainty where relevant.
+
+For every case, explicitly discuss:
+1. Factors supporting grant of bail.
+2. Factors supporting rejection of bail.
+3. The status of the investigation and available evidence.
+4. Risks of absconding, witness interference, or evidence tampering.
+5. Missing information and uncertainty.
+
+Do not ignore important facts merely because other factors favour bail.
+Do not assume that a lack of reported criminal history guarantees bail.
+Provide a case-specific explanation rather than a generic conclusion.
+
+CASE DETAILS
+Facts: {facts}
+Alleged offences / legal sections: {sections or "Not provided"}
+Additional details: {additional_details or "Not provided"}
+Court: {court}
+Accused gender: {gender}
+Previous criminal history: {history}
+
+Return only a valid JSON object with:
+{{
+  "outcome": "REJECTED or GRANTED",
+  "reasoning": "Brief explanation",
+  "factors_for_rejection": ["factor"],
+  "factors_for_grant": ["factor"],
+  "missing_information": ["item"]
+}}
+
+This is an experimental estimate, not legal advice.
+"""
+
+
+    # Keep Ollama as the default for local development.
+    use_groq = str(
+        st.secrets.get("USE_GROQ", "false")
+    ).lower() == "true"
+    print("Groq enabled:", use_groq)
+
+    if use_groq:
+        api_key = st.secrets.get("GROQ_API_KEY", "")
+        model = st.secrets.get("GROQ_MODEL", "")
+        print("Using Groq model:", model)
+
+        if not api_key or not model:
+            raise ValueError(
+                "Groq is enabled, but GROQ_API_KEY or GROQ_MODEL "
+                "is missing from Streamlit secrets."
+            )
+
+        response = requests.post(
+            "https://api.groq.com/openai/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": model,
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": (
+                            "You analyse legal case information cautiously. "
+                            "Return valid JSON only. Do not invent facts."
+                        ),
+                    },
+                    {"role": "user", "content": prompt},
+                ],
+                "temperature": 0.1,
+                "response_format": {"type": "json_object"},
+            },
+            timeout=120,
+        )
+        response.raise_for_status()
+        content = response.json()["choices"][0]["message"]["content"]
+
+    else:
+        response = requests.post(
+            "http://localhost:11434/api/generate",
+            json={
+                "model": "llama3:latest",
+                "prompt": prompt,
+                "stream": False,
+                "format": "json",
+                "options": {"temperature": 0.1},
+            },
+            timeout=180,
+        )
+        response.raise_for_status()
+        content = response.json()["response"]
+
+    result = json.loads(content)
+    outcome = str(result.get("outcome", "")).upper().strip()
+
+    if outcome not in {"GRANTED", "REJECTED"}:
+        raise ValueError("The AI returned an invalid bail outcome.")
+
+    result["outcome"] = outcome
+    result["provider"] = (
+        f"Groq ({model})" if use_groq else "local Llama 3 (Ollama)"
+    )
+    return result
 
 
 # --------------------------------------------------
@@ -426,6 +544,7 @@ with st.container(border=True):
         )
 
     
+   
     if run_new_prediction:
         if not new_facts.strip():
             st.error("Please enter the case facts first.")
@@ -434,56 +553,36 @@ with st.container(border=True):
             st.error("Please enter the court.")
 
         else:
-            # Combine the submitted details into the model's text feature.
-            combined_text = (
-                f"Case facts: {new_facts.strip()}\n"
-                f"Applicable sections/offences: {new_sections.strip()}\n"
-                f"Additional details: {new_conclusion.strip()}\n"
-                f"Previous criminal history: {new_history}"
-            )
-
-            # Normalize gender to match the training data.
             normalized_gender = new_gender.strip().lower()
 
-            new_features = pd.DataFrame([{
-                "text": combined_text,
-                "court": new_court.strip(),
-                "gender": normalized_gender,
-            }])
-
             try:
-                # Get prediction and class probabilities.
-                new_prediction = model.predict(new_features)[0]
-                probabilities = model.predict_proba(new_features)[0]
+                ai_result = predict_bail_with_llama(
+                    facts=new_facts.strip(),
+                    sections=new_sections.strip(),
+                    additional_details=new_conclusion.strip(),
+                    court=new_court.strip(),
+                    gender=new_gender.strip().lower(),
+                    history=new_history,
+                )
 
-                # Map scores using the model's actual class labels.
-                class_scores = {
-                    int(cls): float(prob)
-                    for cls, prob in zip(model.classes_, probabilities)
+                st.session_state["new_case_result"] = {
+                    "label": ai_result["outcome"],
+                    "facts": new_facts,
+                    "sections": new_sections,
+                    "court": new_court.strip(),
+                    "gender": new_gender.strip().lower(),
+                    "history": new_history,
+                    "ai_result": ai_result,
                 }
 
-                if int(new_prediction) not in (0, 1):
-                    st.error(
-                        f"Unexpected model class: {new_prediction}"
-                    )
-                else:
-                    prediction_label = (
-                        "GRANTED" if int(new_prediction) == 1
-                        else "REJECTED"
-                    )
-
-                    st.session_state["new_case_result"] = {
-                        "label": prediction_label,
-                        "facts": new_facts,
-                        "sections": new_sections,
-                        "court": new_court.strip(),
-                        "gender": normalized_gender,
-                        "history": new_history,
-                        "scores": class_scores,
-                    }
-
             except Exception as exc:
-                st.error(f"Prediction failed: {exc}")
+                st.error(f"AI prediction failed: {exc}")
+                st.info(
+                    "Check that Ollama is running and llama3:latest "
+                    "is available. No prediction was generated."
+                )
+
+
 
     new_result = st.session_state.get("new_case_result")
 
@@ -506,34 +605,31 @@ with st.container(border=True):
             new_result["history"],
         )
 
-        scores = new_result["scores"]
+        
+        ai_result = new_result["ai_result"]
 
-        st.markdown("#### Model scores")
-        col1, col2 = st.columns(2)
+        st.markdown("#### AI reasoning")
+        st.write(ai_result.get("reasoning", "No explanation provided."))
 
-        with col1:
-            st.metric(
-                "Bail granted score",
-                f"{scores.get(1, 0.0) * 100:.2f}%",
-            )
+        with st.expander("Factors supporting rejection"):
+            for factor in ai_result.get("factors_for_rejection", []):
+                st.write(f"- {factor}")
 
-        with col2:
-            st.metric(
-                "Bail rejected score",
-                f"{scores.get(0, 0.0) * 100:.2f}%",
-            )
+        with st.expander("Factors supporting grant"):
+            for factor in ai_result.get("factors_for_grant", []):
+                st.write(f"- {factor}")
 
-        with st.expander("Review submitted case details"):
-            st.write("**Case facts:**")
-            st.write(new_result["facts"])
-            st.write("**Gender:**", new_result["gender"])
+        with st.expander("Missing information and uncertainty"):
+            for item in ai_result.get("missing_information", []):
+                st.write(f"- {item}")
 
         st.caption(
-            "Experimental model output only. These scores are not "
-            "necessarily calibrated probabilities of real-world "
-            "legal outcomes and are not legal advice."
+            "This is an experimental AI estimate, not a calibrated probability, "
+            "legal advice, or a guaranteed court outcome."
         )
 
+
+        
 
 # --------------------------------------------------
 # Choose a case
