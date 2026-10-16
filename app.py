@@ -339,46 +339,201 @@ except Exception as exc:
     st.stop()
 
 # --------------------------------------------------
-# Workspace overview
+# Workspace overview — no dataset statistics
 # --------------------------------------------------
-st.markdown("## Workspace overview")
-st.caption("A quick overview of the data and model available in this session.")
-
-json_files = (
-    sorted(RESULTS_DIR.glob("*.json"))
-    if RESULTS_DIR.exists()
-    else []
-)
-
-c1, c2, c3 = st.columns(3, gap="medium")
-
-with c1:
-    st.metric(
-        "Judgments in dataset",
-        f"{len(df):,}",
-        help="Number of records loaded from all_cases.csv.",
-    )
-
-with c2:
-    st.metric(
-        "Courts represented",
-        f"{df['court'].nunique(dropna=True):,}",
-        help="Number of distinct non-missing court values in the dataset.",
-    )
-
-with c3:
-    st.metric(
-        "Existing analyses",
-        f"{len(json_files):,}",
-        help="Number of JSON result files available in final_results.",
-    )
-
+st.markdown("## Workspace Overview")
 st.caption(
-    "The saved model was loaded successfully. This does not indicate "
-    "that its predictions are accurate or independently validated."
+    "Analyze legal cases, generate experimental bail predictions, "
+    "and explore existing judgments."
 )
+
+overview_left, overview_right = st.columns(2, gap="large")
+
+with overview_left:
+    with st.container(border=True):
+        st.markdown("### New Case Analysis")
+        st.write(
+            "Enter case details and generate a bail prediction "
+            "using the trained machine-learning model."
+        )
+
+with overview_right:
+    with st.container(border=True):
+        st.markdown("### Judgment Explorer")
+        st.write(
+            "Review previously processed judgments and their "
+            "available case information."
+        )
 
 st.divider()
+
+# --------------------------------------------------
+# New Case Analysis — user-entered case
+# --------------------------------------------------
+st.markdown("## New Case Analysis")
+st.caption(
+    "Enter the details of a new case to generate an "
+    "experimental bail prediction."
+)
+
+with st.container(border=True):
+    with st.form("new_case_prediction_form"):
+        new_facts = st.text_area(
+            "Case facts and circumstances",
+            placeholder=(
+                "Describe the allegations, events, evidence, "
+                "and relevant circumstances of the case..."
+            ),
+            height=220,
+        )
+
+        new_sections = st.text_input(
+            "Applicable legal sections / alleged offences",
+            placeholder="Enter sections or alleged offences, if known",
+        )
+
+        new_conclusion = st.text_area(
+            "Additional case details",
+            placeholder=(
+                "Add relevant details about the case, if available..."
+            ),
+            height=100,
+        )
+
+        new_court = st.text_input(
+            "Court",
+            placeholder="Enter the court name",
+        )
+
+        new_gender = st.selectbox(
+            "Accused gender",
+            options=["Unknown", "Male", "Female", "Other"],
+        )
+
+        new_history = st.selectbox(
+            "Previous criminal history",
+            options=[
+                "Unknown",
+                "No known previous cases",
+                "Previous cases reported",
+            ],
+        )
+
+        run_new_prediction = st.form_submit_button(
+            "Run Bail Prediction",
+            type="primary",
+            use_container_width=True,
+        )
+
+    
+    if run_new_prediction:
+        if not new_facts.strip():
+            st.error("Please enter the case facts first.")
+
+        elif not new_court.strip():
+            st.error("Please enter the court.")
+
+        else:
+            # Combine the submitted details into the model's text feature.
+            combined_text = (
+                f"Case facts: {new_facts.strip()}\n"
+                f"Applicable sections/offences: {new_sections.strip()}\n"
+                f"Additional details: {new_conclusion.strip()}\n"
+                f"Previous criminal history: {new_history}"
+            )
+
+            # Normalize gender to match the training data.
+            normalized_gender = new_gender.strip().lower()
+
+            new_features = pd.DataFrame([{
+                "text": combined_text,
+                "court": new_court.strip(),
+                "gender": normalized_gender,
+            }])
+
+            try:
+                # Get prediction and class probabilities.
+                new_prediction = model.predict(new_features)[0]
+                probabilities = model.predict_proba(new_features)[0]
+
+                # Map scores using the model's actual class labels.
+                class_scores = {
+                    int(cls): float(prob)
+                    for cls, prob in zip(model.classes_, probabilities)
+                }
+
+                if int(new_prediction) not in (0, 1):
+                    st.error(
+                        f"Unexpected model class: {new_prediction}"
+                    )
+                else:
+                    prediction_label = (
+                        "GRANTED" if int(new_prediction) == 1
+                        else "REJECTED"
+                    )
+
+                    st.session_state["new_case_result"] = {
+                        "label": prediction_label,
+                        "facts": new_facts,
+                        "sections": new_sections,
+                        "court": new_court.strip(),
+                        "gender": normalized_gender,
+                        "history": new_history,
+                        "scores": class_scores,
+                    }
+
+            except Exception as exc:
+                st.error(f"Prediction failed: {exc}")
+
+    new_result = st.session_state.get("new_case_result")
+
+    if new_result:
+        st.divider()
+        st.markdown("### Bail Prediction Result")
+
+        if new_result["label"] == "GRANTED":
+            st.success("Model prediction: BAIL LIKELY TO BE GRANTED")
+        else:
+            st.error("Model prediction: BAIL LIKELY TO BE REJECTED")
+
+        st.write("**Court:**", new_result["court"])
+        st.write(
+            "**Applicable sections/offences:**",
+            new_result["sections"] or "Not provided",
+        )
+        st.write(
+            "**Previous criminal history:**",
+            new_result["history"],
+        )
+
+        scores = new_result["scores"]
+
+        st.markdown("#### Model scores")
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.metric(
+                "Bail granted score",
+                f"{scores.get(1, 0.0) * 100:.2f}%",
+            )
+
+        with col2:
+            st.metric(
+                "Bail rejected score",
+                f"{scores.get(0, 0.0) * 100:.2f}%",
+            )
+
+        with st.expander("Review submitted case details"):
+            st.write("**Case facts:**")
+            st.write(new_result["facts"])
+            st.write("**Gender:**", new_result["gender"])
+
+        st.caption(
+            "Experimental model output only. These scores are not "
+            "necessarily calibrated probabilities of real-world "
+            "legal outcomes and are not legal advice."
+        )
+
 
 # --------------------------------------------------
 # Choose a case
@@ -608,13 +763,14 @@ if result:
             "that a court will reach a particular decision."
         )
 
+
 # --------------------------------------------------
 # Existing processed results
 # --------------------------------------------------
 st.divider()
 st.markdown("## 4 · Existing processed judgments")
 st.caption(
-    "Browse the JSON analysis files already available in your project."
+    "Explore previously processed case information and analysis."
 )
 
 if RESULTS_DIR.exists():
@@ -623,32 +779,160 @@ if RESULTS_DIR.exists():
     st.metric("JSON result files available", len(json_files))
 
     if json_files:
-        with st.container(border=True):
-            selected_result = st.selectbox(
-                "Choose an existing analysis",
-                options=json_files,
-                format_func=lambda p: p.name,
-                key="selected_existing_result",
-            )
+        selected_result = st.selectbox(
+            "Choose an existing analysis",
+            options=json_files,
+            format_func=lambda p: p.name,
+            key="selected_existing_result",
+        )
 
-            if st.button("Load Existing Result", type="secondary"):
-                try:
-                    with selected_result.open("r", encoding="utf-8") as file:
-                        result_data = json.load(file)
-
-                    st.session_state["loaded_json_result"] = result_data
+        if st.button("Load Case Analysis", type="secondary"):
+            try:
+                with selected_result.open("r", encoding="utf-8") as file:
+                    st.session_state["loaded_json_result"] = json.load(file)
                     st.session_state["loaded_json_filename"] = selected_result.name
+            except Exception as exc:
+                st.error(f"Could not read result: {exc}")
 
-                except Exception as exc:
-                    st.error(f"Could not read result: {exc}")
+        result_data = st.session_state.get("loaded_json_result")
+loaded_filename = st.session_state.get("loaded_json_filename")
 
-        if "loaded_json_result" in st.session_state:
-            st.markdown(
-                f"### Analysis: {st.session_state['loaded_json_filename']}"
+if result_data is not None and loaded_filename:
+    st.divider()
+    st.markdown("### Case analysis")
+    st.caption(f"Loaded file: {loaded_filename}")
+
+    st.markdown("#### Case information")
+    st.write("**Case title:**", result_data.get("title") or "Not available")
+    st.write("**Case ID:**", result_data.get("doc_id") or "Not available")
+    st.write("**Date:**", result_data.get("date_iso") or "Not available")
+    st.write("**Court:**", result_data.get("court_std") or "Not available")
+
+    judges = result_data.get("judges_list") or []
+    st.markdown("**Judges:**")
+    if judges:
+        for judge in judges:
+            st.markdown(f"- {judge}")
+    else:
+        st.caption("Not available in the stored analysis.")
+
+    st.divider()
+    st.markdown("#### Judgment analysis")
+
+    fields = [
+        ("Decision label", "decision_label_std"),
+        ("Summary", "plain_summary"),
+        ("Conclusion", "conclusion_clean"),
+        ("Key reasons", "key_reasons"),
+        ("Citations", "citations"),
+        ("Conditions", "conditions"),
+        ("Acts", "acts_list"),
+    ]
+
+    for label, key in fields:
+        st.markdown(f"**{label}**")
+        value = result_data.get(key)
+
+        if value is None or value == "" or value == []:
+            st.caption("Not available in the stored analysis.")
+        elif isinstance(value, list):
+            for item in value:
+                st.markdown(f"- {item}")
+        else:
+            st.write(value)
+
+    with st.expander("View raw JSON"):
+        st.json(result_data)
+
+            
+        def show_field(label, value):
+            st.markdown(f"**{label}**")
+
+            if value is None or value == "" or value == [] or value == {}:
+                st.caption("Not available in the stored analysis.")
+
+            elif isinstance(value, list):
+                for item in value:
+                    if isinstance(item, dict):
+                        st.markdown(f"- {json.dumps(item, ensure_ascii=False)}")
+                    else:
+                        st.markdown(f"- {item}")
+
+            elif isinstance(value, dict):
+                for key, item in value.items():
+                    st.markdown(f"- **{key.replace('_', ' ').title()}:** {item}")
+
+            else:
+                st.write(str(value))
+
+
+            # Basic case information
+            st.markdown("#### Case information")
+            left, right = st.columns(2)
+
+            with left:
+                show_field("Case title", result_data.get("title"))
+                show_field("Case ID", result_data.get("doc_id"))
+                show_field("Date", result_data.get("date_iso"))
+
+            with right:
+                show_field("Court", result_data.get("court_std"))
+                show_field("Judges", result_data.get("judges_list"))
+                show_field("Acts", result_data.get("acts_list"))
+
+            st.divider()
+
+            # Stored decision label
+            st.markdown("#### Stored decision label")
+            show_field(
+                "Decision label",
+                result_data.get("decision_label_std"),
             )
-            st.json(st.session_state["loaded_json_result"])
+
+            # Readable analysis fields
+            st.markdown("#### Judgment analysis")
+
+            show_field(
+                "Plain-language summary",
+                result_data.get("plain_summary"),
+            )
+
+            show_field(
+                "Conclusion",
+                result_data.get("conclusion_clean"),
+            )
+
+            show_field(
+                "Key reasons",
+                result_data.get("key_reasons"),
+            )
+
+            show_field(
+                "Citations",
+                result_data.get("citations"),
+            )
+
+            show_field(
+                "Conditions",
+                result_data.get("conditions"),
+            )
+
+            show_field(
+                "Structured sections",
+                result_data.get("sections_structured"),
+            )
+
+            st.caption(
+                "This page displays information stored in the selected "
+                "JSON file. It does not generate missing legal analysis."
+            )
+
+            with st.expander("View raw JSON"):
+                st.json(result_data)
+
 else:
     st.info("The final_results directory has not been created yet.")
+
 
 # --------------------------------------------------
 # Footer
